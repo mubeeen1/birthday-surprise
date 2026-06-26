@@ -1,0 +1,165 @@
+/* Reset & base */
+* {
+  box-sizing: border-box;
+}
+
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg, #f0f0f0);
+  color: var(--fg, #0b0b0b);
+  overflow: hidden;
+  perspective: var(--perspective, 1800px);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Loader overlay */
+.loader {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #242A1D;
+  transition: opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.2s linear;
+}
+ 
+.loader--hide {
+  opacity: 0;
+  visibility: hidden;
+}
+ 
+.loader__content {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  min-width: 220px;
+}
+ 
+.loader__ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid rgba(107, 117, 86, 0.2);
+  border-top-color: #F0C4CB;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Background canvas (moving gradient) */
+#bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: blur(24px) saturate(1.05);
+  pointer-events: none;
+}
+
+/* Allow native vertical scrolling on mobile, while blocking horizontal gestures in carousel mode */
+.stage.carousel-mode {
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.stage.carousel-mode.dragging {
+  cursor: grabbing;
+}
+
+/* Cards container */
+.cards {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  transform-style: preserve-3d;
+}
+
+/* Card */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(26vw, 360px);
+  aspect-ratio: 4/5;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, filter;
+  transform-origin: 90% center;
+  contain: layout paint;
+}
+
+.card__img {
+  border-radius: 15px;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: translateZ(0);
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 1024px) {
+  .card {
+    width: min(40vw, 420px);
+    transform-origin: 70% center;
+  }
+  #bg {
+    filter: blur(20px) saturate(1.02);
+  }
+}
+
+@media (max-width: 640px) {
+  .stage {
+    height: 80vh;
+  }
+  .card {
+    width: min(86vw, 360px);
+    transform-origin: center center;
+    border-radius: 12px;
+  }
+  .card__img {
+    border-radius: 12px;
+  }
+  .loader__ring {
+    width: 28px;
+    height: 28px;
+  }
+  #bg {
+    filter: blur(16px) saturate(1.02);
+  }
+}
+
+@media (max-width: 480px) {
+  .stage {
+    height: 70vh;
+  }
+  .card {
+    width: min(92vw, 360px);
+    transform-origin: center center;
+  }
+  .cards {
+    transform: translateZ(0);
+  }
+}

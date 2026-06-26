@@ -1,0 +1,552 @@
+@import "@fontsource-variable/geist";
+
+@tailwind base;
+
+@custom-variant dark (&:is(.dark *));
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #242A1D 0%, #141710 50%, #1A1F14 100%);
+    position: relative;
+    overflow-x: hidden;
+
+    /* Luxury poster baseline */
+    font-family: "Playfair Display", "Cormorant Garamond", serif;
+    @apply text-foreground;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    @apply font-sans;
+  }
+
+  /* Premium Typography */
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.03em;
+    font-family: "Playfair Display", "Cormorant Garamond", serif;
+  }
+
+  body {
+    font-family: "Playfair Display", "Cormorant Garamond", serif;
+  }
+
+  /* Elegant text selections */
+  ::selection {
+    background-color: #C87D87;
+    color: white;
+  }
+}
+
+/* Luxe glass background elements */
+.glass-luxury {
+  background: linear-gradient(135deg, rgba(20, 23, 16, 0.7), rgba(36, 42, 29, 0.45));
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(107, 117, 86, 0.25);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+}
+
+.glass-soft {
+  background-color: rgba(20, 23, 16, 0.5);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(107, 117, 86, 0.18);
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FBEAD6 0%, #F0C4CB 50%, #C87D87 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Cinematic overlay */
+.cinematic-overlay {
+  position: relative;
+  background: linear-gradient(
+    to right,
+    rgba(36, 42, 29, 0.25) 0%,
+    transparent 10%,
+    transparent 90%,
+    rgba(36, 42, 29, 0.25) 100%
+  );
+}
+
+/* Premium card styling */
+.card-premium {
+  background: linear-gradient(135deg, #141710 0%, #0C0E0A 100%);
+  border: 1px solid rgba(107, 117, 86, 0.22);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-premium:hover {
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  transform: translateY(-4px);
+}
+
+/* Cinematic shadow style */
+.shadow-cinematic {
+  box-shadow: 0 35px 90px rgba(107, 74, 90, 0.18);
+}
+
+/* Timeless separator */
+.separator-elegant {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(200, 125, 135, 0.3), transparent);
+}
+
+/* Carousel overrides with premium styling */
+.carousel {
+  box-shadow: 0 20px 60px rgba(107, 74, 90, 0.15);
+  border-radius: 2rem;
+}
+
+.carousel .slide img {
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 2rem;
+}
+
+.carousel .control-dots {
+  bottom: 1.5rem;
+}
+
+.carousel .control-dots .dot {
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.carousel .control-dots .dot.selected {
+  background-color: #C87D87;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  width: 2rem;
+}
+
+.carousel .control-arrow {
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.carousel .control-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Scroll reveal animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+/* Premium button styles */
+.btn-premium {
+  position: relative;
+  padding: 1rem 2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #C87D87 0%, #F0C4CB 50%, #E5BCA9 100%);
+  color: #141710; /* Thyme-Shadow text for rich contrast */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 25px rgba(200, 125, 135, 0.35);
+}
+
+.btn-premium:hover {
+  box-shadow: 0 10px 35px rgba(200, 125, 135, 0.55);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Luxe input styling */
+input, textarea {
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 213, 204, 0.5);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #C87D87;
+  ring-opacity: 0.5;
+  border-color: transparent;
+}
+
+/* Premium scrollbar */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #141710;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #6B7556, #242A1D);
+  border-radius: 9999px;
+}
+
+/* Timeless fade transitions */
+.fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Elegant decorative elements */
+.ornament {
+  color: rgba(200, 125, 135, 0.4);
+  font-weight: 300;
+}
+
+/* Premium backdrop blur variants */
+.backdrop-blur-luxury {
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Timeless border gradient */
+.border-gradient {
+  position: relative;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(135deg, #C87D87, #E5BCA9) border-box;
+  border: 1px solid transparent;
+}
+
+/* Responsive Countdown Cards Container */
+.countdown-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 48rem;
+}
+
+@media (min-width: 640px) {
+  .countdown-cards-container {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .countdown-cards-container > div {
+    width: 140px;
+  }
+}
+
+/* Countdown (cinematic) */
+.countdown-card {
+  position: relative;
+  width: 100%;
+  border-radius: 1.5rem;
+  padding: 2rem 1.75rem;
+  min-width: 110px;
+  overflow: hidden;
+  border: 1px solid rgba(107, 117, 86, 0.25);
+  background: linear-gradient(135deg, rgba(20, 23, 16, 0.7), rgba(36, 42, 29, 0.45));
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 25px 65px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transform: translateZ(0);
+}
+
+@media (min-width: 768px) {
+  .countdown-card {
+    padding: 2.25rem 2rem;
+    min-width: 130px;
+  }
+}
+
+.countdown-card-glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle at 50% 40%, rgba(107, 117, 86, 0.25), transparent 60%);
+  filter: blur(18px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.countdown-card-sheen {
+  position: absolute;
+  inset: -60% -60% auto auto;
+  width: 140%;
+  height: 140%;
+  background: linear-gradient(
+    120deg,
+    transparent 35%,
+    rgba(107, 117, 86, 0.15) 46%,
+    rgba(255, 255, 255, 0.2) 52%,
+    transparent 62%
+  );
+  transform: rotate(14deg);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+.countdown-card:hover .countdown-card-sheen {
+  opacity: 1;
+  animation: sheenSweep 900ms ease-out;
+}
+
+@keyframes sheenSweep {
+  0% {
+    transform: translateX(-8%) rotate(14deg);
+  }
+  100% {
+    transform: translateX(10%) rotate(14deg);
+  }
+}
+
+.countdown-card-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.countdown-number {
+  font-family: "Playfair Display", "Cormorant Garamond", serif;
+  font-size: 2.25rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #FBEAD6;
+  text-shadow:
+    0 2px 12px rgba(200, 125, 135, 0.3),
+    0 12px 36px rgba(0, 0, 0, 0.55);
+}
+
+@media (min-width: 768px) {
+  .countdown-number {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .countdown-card {
+    min-width: 84px;
+    padding: 1.4rem 1.25rem;
+  }
+
+  .countdown-number {
+    font-size: 1.75rem;
+  }
+
+  .countdown-label {
+    font-size: 0.65rem;
+  }
+}
+
+.countdown-label {
+  font-family: "Lato", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240, 196, 203, 0.85);
+  font-weight: 400;
+}
+
+.countdown-tick {
+  position: absolute;
+  inset: -1px;
+  border-radius: 1.5rem;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 30%, rgba(107, 117, 86, 0.18), transparent 55%);
+  opacity: 0;
+}
+
+.countdown-card:hover {
+  border-color: rgba(107, 117, 86, 0.55);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Geist Variable', sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(0.22 0.03 120);
+  --foreground: oklch(0.92 0.02 45);
+  --card: oklch(0.15 0.02 120);
+  --card-foreground: oklch(0.92 0.02 45);
+  --popover: oklch(0.15 0.02 120);
+  --popover-foreground: oklch(0.92 0.02 45);
+  --primary: oklch(0.62 0.12 15);
+  --primary-foreground: oklch(0.22 0.03 120);
+  --secondary: oklch(0.15 0.02 120);
+  --secondary-foreground: oklch(0.92 0.02 45);
+  --muted: oklch(0.15 0.02 120);
+  --muted-foreground: oklch(0.70 0.05 120);
+  --accent: oklch(0.15 0.02 120);
+  --accent-foreground: oklch(0.92 0.02 45);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.48 0.08 120 / 20%);
+  --input: oklch(0.18 0.02 120);
+  --ring: oklch(0.48 0.08 120);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.15 0.02 120);
+  --sidebar-foreground: oklch(0.92 0.02 45);
+  --sidebar-primary: oklch(0.48 0.08 120);
+  --sidebar-primary-foreground: oklch(0.22 0.03 120);
+  --sidebar-accent: oklch(0.15 0.02 120);
+  --sidebar-accent-foreground: oklch(0.92 0.02 45);
+  --sidebar-border: oklch(0.48 0.08 120 / 15%);
+  --sidebar-ring: oklch(0.48 0.08 120);
+}
+
+.dark {
+  --background: oklch(0.22 0.03 120);
+  --foreground: oklch(0.92 0.02 45);
+  --card: oklch(0.15 0.02 120);
+  --card-foreground: oklch(0.92 0.02 45);
+  --popover: oklch(0.15 0.02 120);
+  --popover-foreground: oklch(0.92 0.02 45);
+  --primary: oklch(0.62 0.12 15);
+  --primary-foreground: oklch(0.22 0.03 120);
+  --secondary: oklch(0.15 0.02 120);
+  --secondary-foreground: oklch(0.92 0.02 45);
+  --muted: oklch(0.15 0.02 120);
+  --muted-foreground: oklch(0.70 0.05 120);
+  --accent: oklch(0.15 0.02 120);
+  --accent-foreground: oklch(0.92 0.02 45);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(0.48 0.08 120 / 20%);
+  --input: oklch(0.18 0.02 120);
+  --ring: oklch(0.48 0.08 120);
+  --sidebar: oklch(0.15 0.02 120);
+  --sidebar-foreground: oklch(0.92 0.02 45);
+  --sidebar-primary: oklch(0.48 0.08 120);
+  --sidebar-primary-foreground: oklch(0.22 0.03 120);
+  --sidebar-accent: oklch(0.15 0.02 120);
+  --sidebar-accent-foreground: oklch(0.92 0.02 45);
+  --sidebar-border: oklch(0.48 0.08 120 / 15%);
+  --sidebar-ring: oklch(0.48 0.08 120);
+}
+
+/* Premium 3D Flip Card Utilities with Safari/iOS Webkit support */
+.perspective-1000 {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Custom bulletproof Wishes Grid */
+.wishes-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5rem;
+  justify-items: center;
+}
+
+@media (min-width: 768px) {
+  .wishes-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 3rem;
+  }
+}
