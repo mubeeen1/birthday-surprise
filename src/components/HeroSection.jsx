@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import config from "../config";
-import { FiHeart } from "react-icons/fi";
 
 export default function HeroSection({ onOpenLetter }) {
   const containerVariants = {

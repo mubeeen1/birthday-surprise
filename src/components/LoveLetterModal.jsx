@@ -18,6 +18,7 @@ export default function LoveLetterModal({ isOpen, onClose, letter }) {
   // Typing effect (kept from original component)
   useEffect(() => {
     if (!isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplayedText("");
       setIsTyping(false);
       return;

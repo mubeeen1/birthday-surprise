@@ -1,5 +1,5 @@
 const config = {
-  targetDate: "2026-06-25T00:00:00", // Change to a past date to test
+  targetDate: "2026-06-28T00:00:00", // Change to a past date to test
   heroPhoto:
     "https://picsum.photos/id/1060/600/600", // Remote temp image (no local files needed)
   galleryPhotos: [

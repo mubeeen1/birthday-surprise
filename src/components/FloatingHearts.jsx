@@ -4,7 +4,7 @@ import { FaHeart } from "react-icons/fa";
 
 const random = (min, max) => Math.random() * (max - min) + min;
 
-export default function FloatingHearts() {
+export default function FloatingHearts({ zIndex = 3 }) {
   const [hearts, setHearts] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,10 @@ export default function FloatingHearts() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div 
+      className="fixed inset-0 pointer-events-none overflow-hidden"
+      style={{ zIndex }} // Contextual z-index based on screen nesting
+    >
       <AnimatePresence>
         {hearts.map((h) => (
           <motion.div

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import "./GradientCarousel.css";
 
 export default function GradientCarousel({ photos }) {
@@ -502,7 +503,7 @@ export default function GradientCarousel({ photos }) {
       // Use pointer capture to keep receiving touch drag events even if user moves out of the element/viewport
       try {
         stage.setPointerCapture(e.pointerId);
-      } catch (err) {
+      } catch {
         // Fallback if not supported
       }
 
@@ -565,7 +566,9 @@ export default function GradientCarousel({ photos }) {
         if (e) {
           try {
             stage.releasePointerCapture(e.pointerId);
-          } catch (err) {}
+          } catch {
+            // Safe fallback
+          }
         }
         
         isDragging = false;
@@ -637,7 +640,15 @@ export default function GradientCarousel({ photos }) {
   }, [photos]);
 
   return (
-    <main className="stage" ref={stageRef} aria-live="polite">
+    <motion.main
+      initial={{ opacity: 0, y: 50, scale: 0.98 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-120px" }}
+      transition={{ type: "spring", stiffness: 60, damping: 20 }}
+      className="stage"
+      ref={stageRef}
+      aria-live="polite"
+    >
       <div ref={loaderRef} className="loader" aria-label="Loading" aria-live="assertive">
         <div className="loader__content">
           <div className="loader__ring" aria-hidden="true"></div>
@@ -645,6 +656,6 @@ export default function GradientCarousel({ photos }) {
       </div>
       <canvas ref={bgCanvasRef} id="bg" aria-hidden="true"></canvas>
       <section ref={cardsRootRef} className="cards" aria-label="Infinite carousel of images"></section>
-    </main>
+    </motion.main>
   );
 }
