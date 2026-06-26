@@ -156,10 +156,10 @@ export default function LoveLetterModal({ isOpen, onClose, letter }) {
             <button
               type="button"
               onClick={onClose}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full bg-[#C87D87]/10 hover:bg-[#C87D87]/20 text-[#C87D87] transition-all duration-300 shadow-[0_4px_12px_rgba(200,125,135,0.08)] z-20 hover:scale-110 active:scale-95 border border-[#C87D87]/20 flex items-center justify-center cursor-pointer"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-12 h-12 rounded-full bg-[#FBEAD6]/90 hover:bg-[#C87D87] text-[#C87D87] hover:text-white transition-all duration-350 shadow-[0_4px_15px_rgba(200,125,135,0.12)] z-20 hover:scale-110 active:scale-90 border border-[#C87D87]/30 flex items-center justify-center cursor-pointer group"
               aria-label="Close love letter"
             >
-              <FiX className="text-xl sm:text-2xl" />
+              <FiX className="text-[25px] transition-transform duration-300 group-hover:rotate-90" />
             </button>
  
             <div className="relative z-10 text-center">

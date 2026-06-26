@@ -553,7 +553,7 @@ input:focus, textarea:focus {
 .wishes-flip-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem; /* Reduced mobile gap to 1.5rem */
+  gap: 1rem; /* Compact mobile gap between flip cards */
   width: 100%;
   justify-items: center;
   align-items: center;
@@ -562,13 +562,13 @@ input:focus, textarea:focus {
 @media (min-width: 640px) {
   .wishes-flip-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem; /* Reduced tablet gap to 1.75rem */
+    gap: 1.25rem; /* Compact tablet gap between flip cards */
   }
 }
 
 @media (min-width: 1024px) {
   .wishes-flip-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem; /* Reduced desktop gap to 2rem */
+    gap: 1.25rem; /* Compact desktop gap between flip cards */
   }
 }

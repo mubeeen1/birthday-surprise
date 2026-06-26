@@ -112,7 +112,7 @@ export default function CountdownOverlay({ date, onComplete }) {
 
       {/* Content overlay wrapper - centers content and isolates the scrollbar to the viewport edge */}
       <div 
-        className="relative z-10 min-h-full w-full flex flex-col items-center justify-center pt-16 pb-16 px-8 sm:px-16 md:px-24 lg:px-32"
+        className="relative z-10 min-h-full w-full flex flex-col items-center justify-center pt-16 pb-16 px-8 sm:px-20 md:px-32 lg:px-40"
         style={{ width: '100%' }}
       >
         <div 

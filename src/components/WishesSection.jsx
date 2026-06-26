@@ -3,7 +3,7 @@ import { FlipCard } from "./animate-ui/components/community/flip-card";
 
 export default function WishesSection({ wishes }) {
   return (
-    <section className="relative py-32 px-8 sm:px-16 md:px-24 lg:px-32">
+    <section className="relative py-32 px-8 sm:px-20 md:px-32 lg:px-40">
       {/* Decorative background blobs */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-gold/5 rounded-full blur-3xl -z-10 pointer-events-none" />
       <div className="absolute bottom-20 right-10 w-72 h-72 bg-champagne/5 rounded-full blur-3xl -z-10 pointer-events-none" />
