@@ -6,6 +6,7 @@ import HeroSection from "./components/HeroSection";
 import GradientCarousel from "./components/GradientCarousel";
 import WishesSection from "./components/WishesSection";
 import LoveLetterModal from "./components/LoveLetterModal";
+import LoveDeclarationModal from "./components/LoveDeclarationModal";
 import MusicToggle from "./components/MusicToggle";
 import FloatingHearts from "./components/FloatingHearts";
 import ConfettiCelebration from "./components/ConfettiCelebration";
@@ -13,6 +14,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function App() {
   const [countdownFinished, setCountdownFinished] = useState(false);
+  const [loveDeclared, setLoveDeclared] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const [letterOpen, setLetterOpen] = useState(false);
   const audioRef = useRef(null);
@@ -156,12 +158,17 @@ export default function App() {
         <MusicToggle isPlaying={musicPlaying} toggle={toggleMusic} />
       )}
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {!countdownFinished ? (
           <CountdownOverlay
             key="countdown"
             date={countdownDate}
             onComplete={() => setCountdownFinished(true)}
+          />
+        ) : !loveDeclared ? (
+          <LoveDeclarationModal
+            key="love-declaration"
+            onAccept={() => setLoveDeclared(true)}
           />
         ) : (
           <motion.div
