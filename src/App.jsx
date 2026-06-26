@@ -74,6 +74,24 @@ export default function App() {
   useEffect(() => {
     if (!config.music.enabled || !audioRef.current) return;
 
+    const startAudio = () => {
+      if (!audioRef.current) return;
+      audioRef.current
+        .play()
+        .then(() => {
+          // Success playing! Fade in
+          fadeIn(audioRef.current);
+          cleanListeners();
+        })
+        .catch(() => {});
+    };
+
+    const cleanListeners = () => {
+      window.removeEventListener("click", startAudio);
+      window.removeEventListener("touchstart", startAudio);
+      window.removeEventListener("keydown", startAudio);
+    };
+
     // Try to autoplay immediately — browser may allow or block it
     audioRef.current.volume = 0;
     audioRef.current
@@ -91,11 +109,17 @@ export default function App() {
         }, 100);
       })
       .catch(() => {
-        // Autoplay blocked by browser — icon will show "paused", user can hit button
-        console.log("Autoplay blocked — click the music button to start.");
+        // Autoplay blocked by browser — set up a one-time global interaction fallback
+        console.log("Autoplay blocked by browser policy. Setting up interaction fallback...");
+        window.addEventListener("click", startAudio);
+        window.addEventListener("touchstart", startAudio);
+        window.addEventListener("keydown", startAudio);
       });
 
-    return () => clearFade();
+    return () => {
+      clearFade();
+      cleanListeners();
+    };
   }, []);
 
   // ─── Switch audio source when countdown ends ──────────────────────────────

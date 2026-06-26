@@ -126,37 +126,37 @@ export default function LoveLetterModal({ isOpen, onClose, letter }) {
   return (
     <dialog
       ref={dialogRef}
-      className="fixed inset-0 z-[60] m-auto w-[92%] sm:w-[85%] max-w-3xl h-fit max-h-[85vh] p-0 bg-transparent border-0 outline-none overflow-visible flex items-center justify-center backdrop:bg-[#141710]/75 backdrop:backdrop-blur-[12px]"
+      className="fixed inset-0 z-[60] m-auto w-[92%] sm:w-[85%] max-w-3xl h-fit max-h-[85vh] p-0 bg-transparent border-0 outline-none overflow-visible flex items-center justify-center backdrop:bg-[#6B7556]/20 backdrop:backdrop-blur-[8px]"
       aria-labelledby="love-letter-title"
     >
       <div
         data-love-card
-        className="w-full max-h-[85vh] overflow-y-auto rounded-3xl"
+        className="w-full max-h-[85vh] overflow-y-auto rounded-3xl animate-fade-in"
       >
-        <div className="relative overflow-hidden rounded-3xl shadow-[0_25px_70px_rgba(20,23,16,0.7)] border-2 border-[#C87D87]/35 bg-gradient-to-br from-[#242A1D] via-[#141710] to-[#0C0E0A]">
+        <div className="relative overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(107,117,86,0.12)] border-2 border-[#C87D87]/40 bg-gradient-to-br from-[#FBEAD6] via-[#F5D6D9] to-[#E5BCA9]">
           <div className="sr-only" id="love-letter-title">
             {safeLetter.title}
           </div>
  
           {/* Subtly glowing romantic backgrounds */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(240,196,203,0.1),transparent_70%)] pointer-events-none" />
-          <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_30%,rgba(200,125,135,0.05)_45%,transparent_60%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(200,125,135,0.1),transparent_70%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_30%,rgba(107,117,86,0.04)_45%,transparent_60%)] pointer-events-none" />
  
           {/* Luxury top line */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C87D87]/50 to-transparent" />
  
-          <div className="relative z-10 p-6 sm:p-10 md:p-14 backdrop-blur-[4px] bg-[#141710]/10 rounded-3xl">
+          <div className="relative z-10 p-6 sm:p-10 md:p-14 backdrop-blur-[6px] bg-white/20 rounded-3xl">
             {/* Elegant corner stars */}
-            <div className="absolute top-6 left-8 text-[#F0C4CB]/40 font-display text-2xl select-none hidden sm:block">✦</div>
-            <div className="absolute top-6 right-8 text-[#F0C4CB]/40 font-display text-2xl select-none hidden sm:block">✦</div>
-            <div className="absolute bottom-6 left-8 text-[#F0C4CB]/40 font-display text-2xl select-none hidden sm:block">✦</div>
-            <div className="absolute bottom-6 right-8 text-[#F0C4CB]/40 font-display text-2xl select-none hidden sm:block">✦</div>
+            <div className="absolute top-6 left-8 text-[#C87D87]/40 font-display text-2xl select-none hidden sm:block">✦</div>
+            <div className="absolute top-6 right-8 text-[#C87D87]/40 font-display text-2xl select-none hidden sm:block">✦</div>
+            <div className="absolute bottom-6 left-8 text-[#C87D87]/40 font-display text-2xl select-none hidden sm:block">✦</div>
+            <div className="absolute bottom-6 right-8 text-[#C87D87]/40 font-display text-2xl select-none hidden sm:block">✦</div>
  
             {/* Custom Close Button */}
             <button
               type="button"
               onClick={onClose}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full bg-[#6B7556]/15 hover:bg-[#6B7556]/25 text-[#FBEAD6] transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.4)] z-20 hover:scale-110 active:scale-95 border border-[#6B7556]/25 flex items-center justify-center cursor-pointer"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full bg-[#C87D87]/10 hover:bg-[#C87D87]/20 text-[#C87D87] transition-all duration-300 shadow-[0_4px_12px_rgba(200,125,135,0.08)] z-20 hover:scale-110 active:scale-95 border border-[#C87D87]/20 flex items-center justify-center cursor-pointer"
               aria-label="Close love letter"
             >
               <FiX className="text-xl sm:text-2xl" />
@@ -165,34 +165,34 @@ export default function LoveLetterModal({ isOpen, onClose, letter }) {
             <div className="relative z-10 text-center">
               {/* Pulsing heart icon */}
               <div className="flex justify-center mb-6">
-                <div className="text-[#F0C4CB] text-6xl drop-shadow-[0_2px_12px_rgba(240,196,203,0.6)] font-display animate-pulse select-none">♥</div>
+                <div className="text-[#C87D87] text-6xl drop-shadow-[0_2px_12px_rgba(200,125,135,0.35)] font-display animate-pulse select-none">♥</div>
               </div>
  
               <div
-                className="h-px bg-gradient-to-r from-transparent via-[#C87D87]/40 to-transparent w-32 mx-auto mb-8"
+                className="h-px bg-gradient-to-r from-transparent via-[#C87D87]/30 to-transparent w-32 mx-auto mb-8"
               />
  
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-display text-[#FBEAD6] text-center mb-4 font-light tracking-wide leading-tight drop-shadow-[0_2px_8px_rgba(240,196,203,0.15)]">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-display text-[#3D4430] text-center mb-4 font-light tracking-wide leading-tight drop-shadow-[0_1px_4px_rgba(0,0,0,0.05)]">
                 {safeLetter.title}
               </h3>
  
               <div
-                className="h-px bg-gradient-to-r from-transparent via-[#C87D87]/40 to-transparent w-32 mx-auto mb-10"
+                className="h-px bg-gradient-to-r from-transparent via-[#C87D87]/30 to-transparent w-32 mx-auto mb-10"
               />
  
               {/* Hand-written styled parchment text */}
-              <div className="text-base sm:text-lg md:text-xl font-serif text-[#FBEAD6]/90 leading-relaxed whitespace-pre-wrap text-left max-w-2xl mx-auto mb-10 font-light tracking-wide italic px-2 sm:px-6 selection:bg-[#C87D87] selection:text-[#141710]">
+              <div className="text-base sm:text-lg md:text-xl font-serif text-[#3D4430] leading-relaxed whitespace-pre-wrap text-left max-w-2xl mx-auto mb-10 font-light tracking-wide italic px-2 sm:px-6 selection:bg-[#C87D87] selection:text-white">
                 {displayedText}
                 {isTyping && (
-                  <span className="inline-block w-1.5 h-5 sm:h-6 ml-1 bg-[#F0C4CB]/80 animate-pulse" />
+                  <span className="inline-block w-1.5 h-5 sm:h-6 ml-1 bg-[#C87D87]/80 animate-pulse" />
                 )}
               </div>
  
               <div
-                className="h-px bg-gradient-to-r from-transparent via-[#C87D87]/40 to-transparent w-32 mx-auto my-6"
+                className="h-px bg-gradient-to-r from-transparent via-[#C87D87]/30 to-transparent w-32 mx-auto my-6"
               />
  
-              <p className="text-xs sm:text-sm text-[#E5BCA9]/70 font-light tracking-[0.25em] uppercase">
+              <p className="text-xs sm:text-sm text-[#C87D87]/80 font-light tracking-[0.25em] uppercase">
                 Forever yours
               </p>
             </div>

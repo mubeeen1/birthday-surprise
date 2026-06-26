@@ -17,37 +17,37 @@ export default function GradientCarousel({ photos }) {
     const bgCtx = bgCanvas?.getContext("2d", { alpha: false });
 
     // ========== CONFIGURATION ==========
-    const FRICTION = 0.95;
-    const WHEEL_SENS = 0.6;
-        let DRAG_SENS = 1.0;
-        // Visual constants (adjusted per viewport)
-        let MAX_ROTATION = 28;
-        let MAX_DEPTH = 140;
-        let MIN_SCALE = 0.92;
-        const SCALE_RANGE = 0.1;
-        let GAP = 28;
+    const FRICTION = 0.975; // Decreased friction (0.95 -> 0.975) for a longer, smoother, faster glide inertia
+    const WHEEL_SENS = 1.5; // Increased wheel sensitivity (0.6 -> 1.5) for fast wheel/trackpad scrolling
+    let DRAG_SENS = 1.8;
+    // Visual constants (adjusted per viewport)
+    let MAX_ROTATION = 28;
+    let MAX_DEPTH = 140;
+    let MIN_SCALE = 0.92;
+    const SCALE_RANGE = 0.1;
+    let GAP = 80; // Increased initial gap to 80 to match the spacious layout in the reference picture
 
-        function updateViewportConfig() {
-          const w = window.innerWidth || document.documentElement.clientWidth || 375;
-          if (w < 480) {
-            MAX_ROTATION = 12;
-            MAX_DEPTH = 50;
-            MIN_SCALE = 0.96;
-            GAP = 14;
-            DRAG_SENS = 0.8;
-          } else if (w < 768) {
-            MAX_ROTATION = 18;
-            MAX_DEPTH = 80;
-            MIN_SCALE = 0.94;
-            GAP = 20;
-            DRAG_SENS = 0.9;
-          } else {
-            MAX_ROTATION = 28;
-            MAX_DEPTH = 140;
-            MIN_SCALE = 0.92;
-            GAP = 28;
-            DRAG_SENS = 1.0;
-          }
+    function updateViewportConfig() {
+      const w = window.innerWidth || document.documentElement.clientWidth || 375;
+      if (w < 480) {
+        MAX_ROTATION = 12;
+        MAX_DEPTH = 50;
+        MIN_SCALE = 0.96;
+        GAP = 40; // Increased mobile gap from 14 to 40
+        DRAG_SENS = 1.4; // Increased mobile drag sensitivity (0.8 -> 1.4)
+      } else if (w < 768) {
+        MAX_ROTATION = 18;
+        MAX_DEPTH = 80;
+        MIN_SCALE = 0.94;
+        GAP = 60; // Increased tablet gap from 20 to 60
+        DRAG_SENS = 1.6; // Increased tablet drag sensitivity (0.9 -> 1.6)
+      } else {
+        MAX_ROTATION = 28;
+        MAX_DEPTH = 140;
+        MIN_SCALE = 0.92;
+        GAP = 80; // Increased desktop gap from 28 to 80
+        DRAG_SENS = 1.8; // Increased desktop drag sensitivity (1.0 -> 1.8)
+      }
 
           // Recompute dependent layout values if already measured
           STEP = CARD_W + GAP;
@@ -62,7 +62,7 @@ export default function GradientCarousel({ photos }) {
     let isEntering = true;
 
     let CARD_W = 300;
-    let CARD_H = 400;
+    let CARD_H = 400; // Fallback height updated to match the 3:4 aspect ratio (300 * 4 / 3)
     let STEP = CARD_W + GAP;
     let TRACK = 0;
     let SCROLL_X = 0;

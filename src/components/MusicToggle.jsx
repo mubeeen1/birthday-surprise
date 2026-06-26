@@ -19,7 +19,7 @@ export default function MusicToggle({ isPlaying, toggle }) {
         border: "none",
         padding: 0,
         cursor: "pointer",
-        color: "#e5c97e",
+        color: "#C87D87", // Antique Rose color to suit the light background
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

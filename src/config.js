@@ -14,7 +14,10 @@ const config = {
     "https://picsum.photos/id/1084/1200/800",
     "https://picsum.photos/id/109/1200/800",
     "https://picsum.photos/id/110/1200/800",
-    "https://picsum.photos/id/111/1200/800",
+    "https://picsum.photos/id/141/1200/800",
+    "https://picsum.photos/id/112/1200/800",
+    "https://picsum.photos/id/156/1200/800",
+
   ],
   wishes: [
     {

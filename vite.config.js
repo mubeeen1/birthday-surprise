@@ -11,6 +11,14 @@ export default defineConfig({
       "@": path.resolve(process.cwd(), "./src"),
     },
   },
+  server: {
+    // Allow ngrok hostnames used during testing
+    allowedHosts: [
+      "letterless-unvicarious-rosaline.ngrok-free.dev",
+      // also allow other ngrok-free.dev subdomains
+      "*.ngrok-free.dev",
+    ],
+  },
 })
 
 

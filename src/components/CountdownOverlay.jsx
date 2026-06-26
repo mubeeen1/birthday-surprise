@@ -96,7 +96,7 @@ export default function CountdownOverlay({ date, onComplete }) {
     >
       {/* Cinematic background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#242A1D] via-[#141710] to-[#1A1F14]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FBEAD6] via-[#F5D6D9] to-[#E5BCA9]" />
         <motion.div
           animate={{
             background: [
@@ -112,7 +112,7 @@ export default function CountdownOverlay({ date, onComplete }) {
 
       {/* Content overlay wrapper - centers content and isolates the scrollbar to the viewport edge */}
       <div 
-        className="relative z-10 min-h-full w-full flex flex-col items-center justify-center p-4 md:p-8"
+        className="relative z-10 min-h-full w-full flex flex-col items-center justify-center pt-16 pb-16 px-8 sm:px-16 md:px-24 lg:px-32"
         style={{ width: '100%' }}
       >
         <div 

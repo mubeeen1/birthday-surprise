@@ -89,7 +89,7 @@
   top: 50%;
   left: 50%;
   width: min(26vw, 360px);
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/4; /* Balanced portrait ratio (3:4) - slightly shorter than 2:3 */
   isolation: isolate;
   transform-style: preserve-3d;
   backface-visibility: hidden;

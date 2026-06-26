@@ -1,7 +1,7 @@
 import { easeOut, motion } from "framer-motion";
 import * as React from "react";
 
-export function FlipCard({ data }) {
+export function FlipCard({ data, colorConfig }) {
   const [isFlipped, setIsFlipped] = React.useState(false);
 
   const isTouchDevice =
@@ -20,94 +20,174 @@ export function FlipCard({ data }) {
   };
 
   const cardVariants = {
-    front: { rotateY: 0, transition: { duration: 0.5, ease: easeOut } },
-    back: { rotateY: 180, transition: { duration: 0.5, ease: easeOut } },
+    front: { rotateY: 0, transition: { duration: 0.55, ease: easeOut } },
+    back:  { rotateY: 180, transition: { duration: 0.55, ease: easeOut } },
   };
+
+  // Default fallback if colorConfig is not provided
+  const config = colorConfig || {
+    bg: "#ffffff",
+    text: "#1e293b",
+    handle: "#64748b",
+    border: "#e2e8f0",
+    logoBg: "#6B7556",
+    logoText: "#FBEAD6"
+  };
+
+  // Compute a soft luxury satin gradient background based on the solid bg color
+  const getLuxuryGradient = (bgColor) => {
+    switch (bgColor.toUpperCase()) {
+      case "#F0C4CB": // Blush
+        return "linear-gradient(135deg, #F0C4CB 0%, #F8E5E7 100%)";
+      case "#C87D87": // Antique Rose
+        return "linear-gradient(135deg, #C87D87 0%, #D89AA4 100%)";
+      case "#FBEAD6": // Champagne
+        return "linear-gradient(135deg, #FBEAD6 0%, #FFF9F2 100%)";
+      case "#6B7556": // Dried Thyme
+        return "linear-gradient(135deg, #6B7556 0%, #7C8768 100%)";
+      case "#E5BCA9": // Bisque
+        return "linear-gradient(135deg, #E5BCA9 0%, #EED0C2 100%)";
+      default:
+        return `linear-gradient(135deg, ${bgColor} 0%, #ffffff 100%)`;
+    }
+  };
+
+  const gradientBg = getLuxuryGradient(config.bg);
 
   return (
     <div
-      className="mt-2 relative w-40 h-60 md:w-60 md:h-80 cursor-pointer mx-auto"
-      style={{ perspective: "1000px" }}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{
+        perspective: "1200px",
+        width: "240px",
+        height: "340px",
+        cursor: "pointer",
+        margin: "0 auto", // Center within grid item
+      }}
     >
-      {/* FRONT: Profile */}
-      <motion.div
-        className="absolute inset-0 rounded-md border-2 border-foreground/20 px-4 py-6 flex flex-col items-center justify-center bg-gradient-to-br from-muted via-background to-muted text-center"
-        animate={isFlipped ? "back" : "front"}
-        variants={cardVariants}
-        style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}
-      >
-        {data.image ? (
-          <img
-            src={data.image}
-            alt={data.name}
-            className="size-20 md:size-24 rounded-full object-cover mb-4 border-2"
+      {/* Card wrapper — both faces live here */}
+      <div style={{ position: "relative", width: "100%", height: "100%", transformStyle: "preserve-3d" }}>
+
+        {/* ── FRONT ─────────────────────────────────────── */}
+        <motion.div
+          animate={isFlipped ? "back" : "front"}
+          variants={cardVariants}
+          style={{
+            position: "absolute",
+            inset: 0,
+            transformStyle: "preserve-3d",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            background: gradientBg,
+            color: config.text,
+            borderColor: config.border,
+            borderWidth: "1px", // Thinner outer border (1px)
+            borderStyle: "solid",
+            borderRadius: "16px", // Increased rounded corners (16px)
+          }}
+          className="flex flex-col items-center justify-center p-6 shadow-[0_12px_35px_rgba(0,0,0,0.06)] relative"
+        >
+          {/* Luxury Inset Border Frame */}
+          <div 
+            style={{ 
+              borderColor: config.border, 
+              opacity: 0.35,
+              borderWidth: "1px", // Thinner inner border (1px)
+              borderStyle: "solid",
+              borderRadius: "8px", // Increased inner rounding (8px)
+            }} 
+            className="absolute inset-3 pointer-events-none" 
           />
-        ) : (
-          <div className="size-20 md:size-24 rounded-full mb-4 border-2 border-foreground/20 flex items-center justify-center bg-muted text-3xl font-display text-foreground">
-            {data.name?.[0] ?? "✦"}
-          </div>
-        )}
-        <h2 className="text-lg font-bold text-foreground">{data.name}</h2>
-        {data.username && (
-          <p className="text-sm text-muted-foreground">@{data.username}</p>
-        )}
-      </motion.div>
 
-      {/* BACK: Bio + Stats + Socials */}
-      <motion.div
-        className="absolute inset-0 rounded-md border-2 border-foreground/20 px-4 py-6 flex flex-col justify-between items-center gap-y-4 bg-gradient-to-tr from-muted via-background to-muted"
-        initial={{ rotateY: 180 }}
-        animate={isFlipped ? "front" : "back"}
-        variants={cardVariants}
-        style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden", rotateY: 180 }}
-      >
-        <p className="text-xs md:text-sm text-muted-foreground text-center">
-          {data.bio}
-        </p>
-
-        {(data.stats?.following > 0 || data.stats?.followers > 0) && (
-          <div className="px-6 flex items-center justify-between w-full">
-            <div>
-              <p className="text-base font-bold">{data.stats.following}</p>
-              <p className="text-xs text-muted-foreground">Following</p>
-            </div>
-            <div>
-              <p className="text-base font-bold">{data.stats.followers}</p>
-              <p className="text-xs text-muted-foreground">Followers</p>
-            </div>
-            {data.stats?.posts > 0 && (
-              <div>
-                <p className="text-base font-bold">{data.stats.posts}</p>
-                <p className="text-xs text-muted-foreground">Posts</p>
-              </div>
+          {/* Circular Logo / Avatar */}
+          <div 
+            style={{ 
+              width: "64px", 
+              height: "64px", 
+              minWidth: "64px",
+              minHeight: "64px",
+              backgroundColor: config.logoBg, 
+              borderColor: config.border,
+              borderRadius: "50%",
+              borderWidth: "1px", // Thinner logo border (1px)
+              borderStyle: "solid",
+            }}
+            className="overflow-hidden flex items-center justify-center shadow-inner mb-6 relative z-10"
+          >
+            {data.image ? (
+              <img
+                src={data.image}
+                alt={data.name}
+                style={{ width: "100%", height: "100%" }}
+                className="object-cover"
+              />
+            ) : (
+              <span style={{ color: config.logoText }} className="text-xl font-display font-bold">
+                {data.name?.[0] ?? "✦"}
+              </span>
             )}
           </div>
-        )}
 
-        {/* Social links if provided */}
-        {data.socialLinks && Object.values(data.socialLinks).some(Boolean) && (
-          <div className="flex items-center justify-center gap-4">
-            {data.socialLinks.linkedin && (
-              <a href={data.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform text-foreground">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </a>
-            )}
-            {data.socialLinks.github && (
-              <a href={data.socialLinks.github} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform text-foreground">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              </a>
-            )}
-            {data.socialLinks.twitter && (
-              <a href={data.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform text-foreground">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-              </a>
-            )}
-          </div>
-        )}
-      </motion.div>
+          {/* Elegant Luxury Star Ornament */}
+          <span style={{ color: config.text, opacity: 0.45 }} className="text-[11px] mb-4 select-none tracking-widest font-light z-10">✦ ✦ ✦</span>
+
+          {/* Name - Styled with Uppercase and Tracking for Aesthetic Luxury */}
+          <h3 
+            style={{ color: config.text }}
+            className="text-sm font-bold text-center font-display tracking-[0.15em] uppercase leading-relaxed z-10 max-w-[85%] mb-2"
+          >
+            {data.name}
+          </h3>
+        </motion.div>
+
+        {/* ── BACK ──────────────────────────────────────── */}
+        <motion.div
+          initial={{ rotateY: 180 }}
+          animate={isFlipped ? "front" : "back"}
+          variants={cardVariants}
+          style={{
+            position: "absolute",
+            inset: 0,
+            transformStyle: "preserve-3d",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            rotateY: 180,
+            background: gradientBg,
+            color: config.text,
+            borderColor: config.border,
+            borderWidth: "1px", // Thinner outer border (1px)
+            borderStyle: "solid",
+            borderRadius: "16px", // Increased rounded corners (16px)
+          }}
+          className="flex flex-col items-center justify-center p-8 shadow-[0_12px_35px_rgba(0,0,0,0.06)] relative"
+        >
+          {/* Luxury Inset Border Frame */}
+          <div 
+            style={{ 
+              borderColor: config.border, 
+              opacity: 0.35,
+              borderWidth: "1px", // Thinner inner border (1px)
+              borderStyle: "solid",
+              borderRadius: "8px", // Increased inner rounding (8px)
+            }} 
+            className="absolute inset-3 pointer-events-none" 
+          />
+
+          {/* Wish Text - Styled like the Love Letter popup font */}
+          <p 
+            style={{ color: config.text }}
+            className="text-base text-center leading-relaxed font-serif font-light italic px-2 relative z-10"
+          >
+            {data.bio}
+          </p>
+
+          {/* Elegant Luxury Star Ornament Bottom */}
+          <span style={{ color: config.text, opacity: 0.35 }} className="absolute bottom-5 text-[10px] select-none font-light">✶</span>
+        </motion.div>
+
+      </div>
     </div>
   );
 }

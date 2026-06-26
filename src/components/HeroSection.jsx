@@ -28,7 +28,7 @@ export default function HeroSection({ onOpenLetter }) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-4"
+      className="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-8 sm:px-16 md:px-24 lg:px-32"
     >
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
