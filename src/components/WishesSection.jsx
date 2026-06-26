@@ -25,9 +25,6 @@ export default function WishesSection({ wishes }) {
             <span className="text-gradient-gold">Heart</span>
           </h2>
           <div className="w-32 md:w-40 separator-elegant mx-auto mt-8" />
-          <p className="text-base sm:text-lg md:text-2xl font-cursive text-gold mt-8">
-            My deepest desires for you
-          </p>
         </motion.div>
 
         {/* ── 4-column grid ─────────────────────────────────── */}

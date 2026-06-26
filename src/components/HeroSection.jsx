@@ -112,16 +112,6 @@ export default function HeroSection({ onOpenLetter }) {
             </span>
           </motion.button>
         </motion.div>
-
-        {/* Bottom ornament */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-16 pt-12 border-t border-gold/20"
-        >
-          <p className="text-xs md:text-sm text-mauve/60 font-light tracking-widest uppercase">
-            A celebration of eternal love
-          </p>
-        </motion.div>
       </div>
     </motion.section>
   );

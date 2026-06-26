@@ -145,7 +145,7 @@ export default function App() {
       {config.music.enabled && (
         <audio
           ref={audioRef}
-          src={countdownFinished ? "/romantic-piano.mp3" : "/countdown-ticking.mp3"}
+          src={countdownFinished ? "/main-audio.mp3" : "/countdown-ticking.mp3"}
           loop
           preload="auto"
           onPlay={() => setMusicPlaying(true)}

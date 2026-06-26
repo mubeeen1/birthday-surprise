@@ -80,7 +80,7 @@ Your Love ❤️`,
   },
   music: {
     enabled: true,
-    url: "/romantic-piano.mp3",
+    url: "/main-audio.mp3",
   },
 };
 
