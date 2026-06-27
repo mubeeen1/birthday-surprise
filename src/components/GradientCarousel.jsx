@@ -19,7 +19,7 @@ export default function GradientCarousel({ photos }) {
 
     // ========== CONFIGURATION ==========
     const FRICTION = 0.975; // Decreased friction (0.95 -> 0.975) for a longer, smoother, faster glide inertia
-    const WHEEL_SENS = 1.5; // Increased wheel sensitivity (0.6 -> 1.5) for fast wheel/trackpad scrolling
+    const WHEEL_SENS = 0.8; // Decreased wheel sensitivity from 1.5 to 0.8 for more controlled scrolling
     let DRAG_SENS = 1.8;
     // Visual constants (adjusted per viewport)
     let MAX_ROTATION = 28;
@@ -75,6 +75,8 @@ export default function GradientCarousel({ photos }) {
     let bgRAF = null;
     let lastTime = 0;
     let lastBgDraw = 0;
+    let targetScrollX = 0;
+    let wheelTimeout = null;
 
     let gradPalette = [];
     let gradCurrent = {
@@ -277,10 +279,20 @@ export default function GradientCarousel({ photos }) {
         const img = new Image();
         img.className = "card__img";
         img.decoding = "async";
-        img.loading = "eager";
-        img.fetchPriority = "high";
         img.draggable = false;
-        img.src = src;
+
+        // Eagerly load the first 5 images, defer the rest to load in the background
+        if (i < 5) {
+          img.loading = "eager";
+          img.fetchPriority = "high";
+          img.src = src;
+        } else {
+          img.loading = "lazy";
+          img.fetchPriority = "low";
+          img.dataset.src = src;
+          // Set a transparent blank 300x400 SVG placeholder to maintain layout and prevent broken image icon
+          img.src = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 300 400'%2F%3E";
+        }
 
         card.appendChild(img);
         fragment.appendChild(card);
@@ -368,11 +380,37 @@ export default function GradientCarousel({ photos }) {
       const dt = lastTime ? (t - lastTime) / 1000 : 0;
       lastTime = t;
 
-      if (!isDragging) {
-        SCROLL_X = mod(SCROLL_X + vX * dt, TRACK);
-        const decay = Math.pow(FRICTION, dt * 60);
-        vX *= decay;
-        if (Math.abs(vX) < 0.02) vX = 0;
+      if (isDragging) {
+        targetScrollX = SCROLL_X;
+        vX = 0;
+      } else {
+        if (Math.abs(vX) > 80) {
+          // Momentum glide from drag release
+          SCROLL_X = mod(SCROLL_X + vX * dt, TRACK);
+          targetScrollX = SCROLL_X;
+          const decay = Math.pow(FRICTION, dt * 60);
+          vX *= decay;
+        } else {
+          // Snap to nearest card if we finished sliding/scrolling but aren't centered
+          if (vX !== 0) {
+            vX = 0;
+            const nearestCardIndex = Math.round(SCROLL_X / STEP);
+            targetScrollX = mod(nearestCardIndex * STEP, TRACK);
+          }
+
+          // Smooth scroll / snap lerp (frame-rate independent easing)
+          let diff = targetScrollX - SCROLL_X;
+          const half = TRACK / 2;
+          if (diff < -half) diff += TRACK;
+          if (diff > half) diff -= TRACK;
+
+          const speed = 7.0; // Easing speed
+          if (Math.abs(diff) > 0.05) {
+            SCROLL_X = mod(SCROLL_X + diff * (1 - Math.exp(-speed * dt)), TRACK);
+          } else {
+            SCROLL_X = targetScrollX;
+          }
+        }
       }
 
       updateCarouselTransforms();
@@ -393,6 +431,20 @@ export default function GradientCarousel({ photos }) {
       gradPalette = items.map((it, i) => {
         const img = it.el.querySelector("img");
         return extractColors(img, i);
+      });
+    }
+
+    function loadDeferredImages() {
+      items.forEach((it, i) => {
+        if (i >= 5) {
+          const img = it.el.querySelector("img");
+          if (img && img.dataset.src) {
+            img.src = img.dataset.src;
+            img.addEventListener("load", () => {
+              gradPalette[i] = extractColors(img, i);
+            }, { once: true });
+          }
+        }
       });
     }
 
@@ -494,11 +546,30 @@ export default function GradientCarousel({ photos }) {
     const onWheel = (e) => {
       if (isEntering) return;
       e.preventDefault();
-      vX += -e.deltaX * WHEEL_SENS + -e.deltaY * WHEEL_SENS * 0.5;
+      
+      // Stop ongoing glide inertia
+      vX = 0;
+
+      // Accumulate wheel delta on targetScrollX
+      const delta = -e.deltaX * WHEEL_SENS * 1.5 + -e.deltaY * WHEEL_SENS * 0.75;
+      targetScrollX = mod(targetScrollX + delta, TRACK);
+
+      // Snap to closest card after scrolling stops (inactivity threshold of 200ms)
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(() => {
+        if (!isDragging && vX === 0) {
+          const nearestCardIndex = Math.round(targetScrollX / STEP);
+          targetScrollX = mod(nearestCardIndex * STEP, TRACK);
+        }
+      }, 200);
     };
 
     const onPointerDown = (e) => {
       if (isEntering) return;
+
+      clearTimeout(wheelTimeout);
+      vX = 0;
+      targetScrollX = SCROLL_X;
 
       // Use pointer capture to keep receiving touch drag events even if user moves out of the element/viewport
       try {
@@ -596,8 +667,9 @@ export default function GradientCarousel({ photos }) {
       measure();
       buildPalette();
 
-      // Wait for images to load
-      const imgPromises = items.map((it) => {
+      // Wait only for the first 5 critical images to load before hiding loader
+      const criticalItems = items.slice(0, 5);
+      const imgPromises = criticalItems.map((it) => {
         const img = it.el.querySelector("img");
         if (!img || img.complete) return Promise.resolve();
         return new Promise((resolve) => {
@@ -625,6 +697,9 @@ export default function GradientCarousel({ photos }) {
 
       startCarousel();
       startBG();
+
+      // Start background loading of remaining images
+      loadDeferredImages();
     }
 
     init();
@@ -633,6 +708,7 @@ export default function GradientCarousel({ photos }) {
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
       if (bgRAF) cancelAnimationFrame(bgRAF);
+      if (wheelTimeout) clearTimeout(wheelTimeout);
       stage?.removeEventListener("wheel", onWheel);
       stage?.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("resize", onResize);

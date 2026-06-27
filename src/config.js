@@ -1,23 +1,36 @@
 const config = {
-  targetDate: "2026-06-28T00:00:00", // Change to a past date to test
+  targetDate: "2026-06-27T00:00:00", // Change to a past date to test
   heroPhoto:
     "https://picsum.photos/id/1060/600/600", // Remote temp image (no local files needed)
   galleryPhotos: [
-    "https://picsum.photos/id/1011/1200/800",
-    "https://picsum.photos/id/1015/1200/800",
-    "https://picsum.photos/id/1025/1200/800",
-    "https://picsum.photos/id/1035/1200/800",
-    "https://picsum.photos/id/1042/1200/800",
-    "https://picsum.photos/id/1050/1200/800",
-    "https://picsum.photos/id/1067/1200/800",
-    "https://picsum.photos/id/1074/1200/800",
-    "https://picsum.photos/id/1084/1200/800",
-    "https://picsum.photos/id/109/1200/800",
-    "https://picsum.photos/id/110/1200/800",
-    "https://picsum.photos/id/141/1200/800",
-    "https://picsum.photos/id/112/1200/800",
-    "https://picsum.photos/id/156/1200/800",
-
+    "/images/20260627_093620.webp",
+    "/images/20260627_102107.webp",
+    "/images/20260627_093437.webp",
+    "/images/20260627_095404.webp",
+    "/images/20260627_102231.webp",
+    "/images/20260627_102458.webp",
+    "/images/20260627_100824.webp",
+    "/images/20260627_094527.webp",
+    "/images/20260627_101428.webp",
+    "/images/20260627_095057.webp",
+    "/images/20260627_100712.webp",
+    "/images/20260627_095626.webp",
+    "/images/20260627_093348.webp",
+    "/images/20260627_100914.webp",
+    "/images/20260627_095536.webp",
+    "/images/20260627_101843.webp",
+    "/images/20260627_093213.webp",
+    "/images/20260627_101941.webp",
+    "/images/20260627_095001.webp",
+    "/images/20260627_095441.webp",
+    "/images/20260627_102358.webp",
+    "/images/20260627_101224.webp",
+    "/images/20260627_094647.webp",
+    "/images/20260627_093714.webp",
+    "/images/20260627_095205.webp",
+    "/images/20260627_102942.webp",
+    "/images/20260627_094859.webp",
+    "/images/20260627_101049.webp",
   ],
   wishes: [
     {
