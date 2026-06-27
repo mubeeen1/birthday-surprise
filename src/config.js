@@ -1,5 +1,5 @@
 const config = {
-  targetDate: "2026-06-25T00:00:00", // Change to a past date to test
+  targetDate: "2026-07-03T00:00:00", // Change to a past date to test
   heroPhoto:
     "/images/20260627_093348.webp", // Remote temp image (no local files needed)
   galleryPhotos: [
