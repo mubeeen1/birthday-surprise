@@ -34,44 +34,50 @@ const config = {
   ],
   wishes: [
     {
-      name: "Alishba Fatima",
-      text: "On your special day, I want you to know you’re the most beautiful chapter in my life.",
+      name: "My Eternity 🕊️",
+      text: "If I could give you one gift, it would be the ability to see yourself through my eyes—only then would you understand how incredibly perfect you are. Happy birthday to my entire world.",
       logoUrl:
         "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
     },
     {
-      name: "SUNSHINE",
-      text: "You are the poetry my soul never knew it could write. Happy birthday, my love.",
+      name: "My Princess 👑",
+      text: "On your special day, I want you to know you're the most beautiful chapter in my book of life. Meeting you was fate, but loving you is my life's greatest purpose. Happy birthday, my queen.",
       logoUrl:
         "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
     },
     {
-      name: "MOONLIGHT",
-      text: "With every sunrise, I fall deeper in love with you.",
+      name: "SUNSHINE ☀️",
+      text: "You are the poetry my soul never knew it could write, and the light that guided me out of my darkest days. Thank you for simply existing and choosing to love me. Happy birthday, my love.",
       logoUrl:
         "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
     },
     {
-      name: "Alishba Fatima",
-      text: "In your eyes, I found my forever home. I love you endlessly.",
+      name: "MOONLIGHT 🌙",
+      text: "With every sunrise and sunset, I find myself falling deeper in love with you. In a world full of temporary things, you are my absolute forever. Happy birthday to the holder of my heart.",
       logoUrl:
         "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
     },
     {
-      name: "Alishba Fatima",
-      text: "May this year bring you all the joy you’ve given me, multiplied a thousand times.",
+      name: "My Soulmate ♾️",
+      text: "In your eyes, I found my safe haven and my forever home. You've healed the parts of me I never told you were broken. I love you endlessly, in this lifetime and every single one that follows.",
       logoUrl:
         "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
     },
     {
-      name: "Alishba Fatima",
-      text: "test wish 1",
+      name: "My Whole Heart ❤️",
+      text: "May this year return to you all the warmth, kindness, and boundless joy you've given me, multiplied a thousand times. You deserve the universe, and I promise to spend my life trying to give it to you.",
       logoUrl:
         "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
     },
     {
-      name: "Alishba Fatima",
-      text: "test wish 2",
+      name: "My Sweetheart 🧸",
+      text: "You are in every thought, every heartbeat, and every prayer of mine. Knowing you, loving you, and being loved by you is the greatest miracle that has ever happened to me. Happy birthday, baby.",
+      logoUrl:
+        "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
+    },
+    {
+      name: "Lovebug 🐞",
+      text: "Even on the quietest days, your love makes my heart beat with overwhelming gratitude. You are my dream come true, my best friend, and my most cherished blessing. I love you more than words could ever tell.",
       logoUrl:
         "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
     },
@@ -80,15 +86,16 @@ const config = {
   loveLetter: {
     title: "A Letter for You, My Love 💌",
     content: `My Dearest,
-I wanted to write you something special today – your birthday. From the moment you came into my life, everything changed. The world became softer, brighter, and infinitely more beautiful.
 
-I still remember the first time I saw you smile. It was like the sun breaking through a cloudy sky. Every single day since then has been a gift. You are the reason I believe in love stories that never end.
+I wanted to write you something truly special today on your birthday. From the very moment you walked into my life, you changed it in ways I still struggle to put into words. You made my world softer, warmer, and so much brighter just by being you.
 
-On your special day, I wish you all the happiness the universe can hold. May your dreams unfold like the petals of a rose, and may every moment remind you how deeply you are loved.
+I still remember the first time I saw you smile. It was like everything else around us simply faded away. Every single day since then has felt like a quiet miracle. You are my safe haven, the one place where I can let my guard down completely and feel understood. I look at you and I see my future, my best friend, and my whole heart.
 
-Thank you for being my safe place, my joy, my everything. I can’t wait to write the rest of our story together.
+On your special day, I wish you all the peace and joy this world has to offer. I hope you always remember how much you matter, not just to me, but to everyone who is lucky enough to know you. You deserve the absolute best, and I promise to spend all my tomorrows loving you, supporting you, and standing by your side.
 
-Forever yours,
+Thank you for being my home. I cannot wait to keep writing the rest of our lives together.
+
+Forever and always yours,
 Your Love ❤️`,
   },
   music: {

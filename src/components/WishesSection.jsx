@@ -40,11 +40,11 @@ export default function WishesSection({ wishes }) {
         >
           {(() => {
             const paletteColors = [
-              { bg: "#F0C4CB", text: "#3D4430", handle: "rgba(61, 68, 48, 0.75)", border: "#C87D87", logoBg: "#6B7556", logoText: "#FBEAD6" },
-              { bg: "#C87D87", text: "#FBEAD6", handle: "rgba(251, 234, 214, 0.75)", border: "#FBEAD6", logoBg: "#FBEAD6", logoText: "#C87D87" },
-              { bg: "#FBEAD6", text: "#6B7556", handle: "rgba(107, 117, 86, 0.75)", border: "#E5BCA9", logoBg: "#6B7556", logoText: "#FBEAD6" },
-              { bg: "#6B7556", text: "#FBEAD6", handle: "rgba(251, 234, 214, 0.75)", border: "#E5BCA9", logoBg: "#FBEAD6", logoText: "#6B7556" },
-              { bg: "#E5BCA9", text: "#3D4430", handle: "rgba(61, 68, 48, 0.75)", border: "#C87D87", logoBg: "#6B7556", logoText: "#FBEAD6" }
+              { bg: "#F0C4CB", text: "#3B1E22", handle: "rgba(59, 30, 34, 0.75)", border: "#C87D87", logoBg: "#3B1E22", logoText: "#FBEAD6" },
+              { bg: "#C87D87", text: "#FFFDF9", handle: "rgba(255, 253, 249, 0.75)", border: "#FFFDF9", logoBg: "#FFFDF9", logoText: "#C87D87" },
+              { bg: "#FBEAD6", text: "#2E3B1E", handle: "rgba(46, 59, 30, 0.75)", border: "#E5BCA9", logoBg: "#2E3B1E", logoText: "#FBEAD6" },
+              { bg: "#6B7556", text: "#FFFDF9", handle: "rgba(255, 253, 249, 0.75)", border: "#E5BCA9", logoBg: "#FFFDF9", logoText: "#6B7556" },
+              { bg: "#E5BCA9", text: "#3B261D", handle: "rgba(59, 38, 29, 0.75)", border: "#C87D87", logoBg: "#3B261D", logoText: "#FBEAD6" }
             ];
 
             return wishes.map((wish, idx) => (

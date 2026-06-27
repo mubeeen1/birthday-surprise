@@ -136,7 +136,7 @@ export function FlipCard({ data, colorConfig }) {
           {/* Name - Styled with Uppercase and Tracking for Aesthetic Luxury */}
           <h3 
             style={{ color: config.text }}
-            className="text-sm font-bold text-center font-display tracking-[0.15em] uppercase leading-relaxed z-10 max-w-[85%] mb-2"
+            className="text-base font-extrabold text-center font-display tracking-[0.18em] uppercase leading-relaxed z-10 max-w-[85%] mb-2"
           >
             {data.name}
           </h3>
@@ -178,7 +178,7 @@ export function FlipCard({ data, colorConfig }) {
           {/* Wish Text - Styled like the Love Letter popup font */}
           <p 
             style={{ color: config.text }}
-            className="text-base text-center leading-relaxed font-serif font-light italic px-2 relative z-10"
+            className="text-[14px] sm:text-base text-center leading-relaxed font-serif font-medium not-italic px-1 relative z-10"
           >
             {data.bio}
           </p>
