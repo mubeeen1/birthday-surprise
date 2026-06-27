@@ -81,7 +81,8 @@ export default function GradientCarousel({ photos }) {
     let gradPalette = [];
     let gradCurrent = {
       r1: 240, g1: 240, b1: 240,
-      r2: 235, g2: 235, b2: 235
+      r2: 235, g2: 235, b2: 235,
+      bgr: 11, bgg: 12, bgb: 14 // Start with a dark charcoal base background
     };
     let bgFastUntil = 0;
 
@@ -158,9 +159,10 @@ export default function GradientCarousel({ photos }) {
     function fallbackFromIndex(idx) {
       const h = (idx * 37) % 360;
       const s = 0.65;
-      const c1 = hslToRgb(h, s, 0.52);
-      const c2 = hslToRgb(h, s, 0.72);
-      return { c1, c2 };
+      const c1 = hslToRgb(h, s, 0.45);
+      const c2 = hslToRgb(h, s, 0.60);
+      const bg = hslToRgb(h, s * 0.25, 0.07);
+      return { c1, c2, bg };
     }
 
     // ========== COLOR EXTRACTION ==========
@@ -246,19 +248,20 @@ export default function GradientCarousel({ photos }) {
         const [pr, pg, pb] = avgRGB(pIdx);
         let [h1, s1] = rgbToHsl(pr, pg, pb);
         s1 = Math.max(0.45, Math.min(1, s1 * 1.15));
-        const c1 = hslToRgb(h1, s1, 0.5);
+        const c1 = hslToRgb(h1, s1, 0.45);
+        const bg = hslToRgb(h1, s1 * 0.25, 0.07);
 
         let c2;
         if (sIdx >= 0 && sW >= pW * 0.6) {
           const [sr, sg, sb] = avgRGB(sIdx);
           let [h2, s2] = rgbToHsl(sr, sg, sb);
           s2 = Math.max(0.45, Math.min(1, s2 * 1.05));
-          c2 = hslToRgb(h2, s2, 0.72);
+          c2 = hslToRgb(h2, s2, 0.60);
         } else {
-          c2 = hslToRgb(h1, s1, 0.72);
+          c2 = hslToRgb(h1, s1, 0.60);
         }
 
-        return { c1, c2 };
+        return { c1, c2, bg };
       } catch {
         return fallbackFromIndex(idx);
       }
@@ -439,10 +442,11 @@ export default function GradientCarousel({ photos }) {
         if (i >= 5) {
           const img = it.el.querySelector("img");
           if (img && img.dataset.src) {
-            img.src = img.dataset.src;
+            // Register listener BEFORE setting src to prevent missing cached loads
             img.addEventListener("load", () => {
               gradPalette[i] = extractColors(img, i);
             }, { once: true });
+            img.src = img.dataset.src;
           }
         }
       });
@@ -452,7 +456,7 @@ export default function GradientCarousel({ photos }) {
       if (!bgCtx || idx < 0 || idx >= items.length || idx === activeIndex) return;
 
       activeIndex = idx;
-      const pal = gradPalette[idx] || { c1: [240, 240, 240], c2: [235, 235, 235] };
+      const pal = gradPalette[idx] || { c1: [240, 240, 240], c2: [235, 235, 235], bg: [11, 12, 14] };
       const to = {
         r1: pal.c1[0],
         g1: pal.c1[1],
@@ -460,6 +464,9 @@ export default function GradientCarousel({ photos }) {
         r2: pal.c2[0],
         g2: pal.c2[1],
         b2: pal.c2[2],
+        bgr: pal.bg[0],
+        bgg: pal.bg[1],
+        bgb: pal.bg[2],
       };
 
       if (window.gsap) {
@@ -504,7 +511,11 @@ export default function GradientCarousel({ photos }) {
       const w = bgCanvas.clientWidth || stage.clientWidth;
       const h = bgCanvas.clientHeight || stage.clientHeight;
 
-      bgCtx.fillStyle = "#242A1D";
+      // Deep premium base background that dynamically matches the active image
+      const bg_r = Math.round(gradCurrent.bgr);
+      const bg_g = Math.round(gradCurrent.bgg);
+      const bg_b = Math.round(gradCurrent.bgb);
+      bgCtx.fillStyle = `rgb(${bg_r}, ${bg_g}, ${bg_b})`;
       bgCtx.fillRect(0, 0, w, h);
 
       const time = now * 0.0002;
@@ -521,14 +532,21 @@ export default function GradientCarousel({ photos }) {
       const r1 = Math.max(w, h) * 0.75;
       const r2 = Math.max(w, h) * 0.65;
 
+      // Soft ambient glows with reduced opacity for premium blending
+      const r1_r = Math.round(gradCurrent.r1);
+      const g1_r = Math.round(gradCurrent.g1);
+      const b1_r = Math.round(gradCurrent.b1);
       const g1 = bgCtx.createRadialGradient(x1, y1, 0, x1, y1, r1);
-      g1.addColorStop(0, `rgba(${gradCurrent.r1},${gradCurrent.g1},${gradCurrent.b1},0.85)`);
+      g1.addColorStop(0, `rgba(${r1_r},${g1_r},${b1_r},0.35)`);
       g1.addColorStop(1, "rgba(255,255,255,0)");
       bgCtx.fillStyle = g1;
       bgCtx.fillRect(0, 0, w, h);
 
+      const r2_r = Math.round(gradCurrent.r2);
+      const g2_r = Math.round(gradCurrent.g2);
+      const b2_r = Math.round(gradCurrent.b2);
       const g2 = bgCtx.createRadialGradient(x2, y2, 0, x2, y2, r2);
-      g2.addColorStop(0, `rgba(${gradCurrent.r2},${gradCurrent.g2},${gradCurrent.b2},0.70)`);
+      g2.addColorStop(0, `rgba(${r2_r},${g2_r},${b2_r},0.25)`);
       g2.addColorStop(1, "rgba(255,255,255,0)");
       bgCtx.fillStyle = g2;
       bgCtx.fillRect(0, 0, w, h);
@@ -680,6 +698,14 @@ export default function GradientCarousel({ photos }) {
       });
 
       await Promise.all(imgPromises);
+
+      // Re-extract colors for the first 5 images now that they are fully loaded
+      for (let i = 0; i < 5; i++) {
+        const img = items[i].el.querySelector("img");
+        if (img) {
+          gradPalette[i] = extractColors(img, i);
+        }
+      }
 
       if (loader) {
         loader.classList.add("loader--hide");
