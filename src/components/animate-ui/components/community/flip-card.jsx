@@ -1,5 +1,6 @@
 import { easeOut, motion } from "framer-motion";
 import * as React from "react";
+import * as Lucide from "lucide-react";
 
 export function FlipCard({ data, colorConfig }) {
   const [isFlipped, setIsFlipped] = React.useState(false);
@@ -116,22 +117,18 @@ export function FlipCard({ data, colorConfig }) {
             }}
             className="overflow-hidden flex items-center justify-center shadow-inner mb-6 relative z-10"
           >
-            {data.image && (data.image.startsWith("http") || data.image.startsWith("/")) ? (
-              <img
-                src={data.image}
-                alt={data.name}
-                style={{ width: "100%", height: "100%" }}
-                className="object-cover"
-              />
-            ) : data.image ? (
-              <span className="text-3xl select-none filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.15)] leading-none flex items-center justify-center">
-                {data.image}
-              </span>
-            ) : (
-              <span style={{ color: config.logoText }} className="text-xl font-display font-bold">
-                {data.name?.[0] ?? "✦"}
-              </span>
-            )}
+            {(() => {
+              const IconName = data.iconName || "Sparkles";
+              const IconComponent = Lucide[IconName] || Lucide.Sparkles;
+              return (
+                <IconComponent 
+                  size={26} 
+                  strokeWidth={1.5} 
+                  style={{ color: config.logoText }} 
+                  className="filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.1)]"
+                />
+              );
+            })()}
           </div>
 
           {/* Elegant Luxury Star Ornament */}

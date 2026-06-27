@@ -63,11 +63,8 @@ export default function WishesSection({ wishes }) {
                 <FlipCard
                   data={{
                     name: wish.name,
-                    username: "",
-                    image: wish.logoUrl,
+                    iconName: wish.logoUrl,
                     bio: wish.text,
-                    stats: { following: 0, followers: 0, posts: 0 },
-                    socialLinks: {},
                   }}
                   colorConfig={paletteColors[idx % paletteColors.length]}
                 />
