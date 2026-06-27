@@ -80,9 +80,14 @@ export default function GradientCarousel({ photos }) {
 
     let gradPalette = [];
     let gradCurrent = {
-      r1: 240, g1: 240, b1: 240,
-      r2: 235, g2: 235, b2: 235,
-      bgr: 11, bgg: 12, bgb: 14 // Start with a dark charcoal base background
+      r1: 228, g1: 180, b1: 180,
+      r2: 232, g2: 195, b2: 195,
+      bgr: 222, bgg: 201, bgb: 201 // Soft light rose start (matching first card fallback)
+    };
+    let gradTarget = {
+      r1: 228, g1: 180, b1: 180,
+      r2: 232, g2: 195, b2: 195,
+      bgr: 222, bgg: 201, bgb: 201
     };
     let bgFastUntil = 0;
 
@@ -159,9 +164,9 @@ export default function GradientCarousel({ photos }) {
     function fallbackFromIndex(idx) {
       const h = (idx * 37) % 360;
       const s = 0.65;
-      const c1 = hslToRgb(h, s, 0.45);
-      const c2 = hslToRgb(h, s, 0.60);
-      const bg = hslToRgb(h, s * 0.25, 0.07);
+      const c1 = hslToRgb(h, s * 0.9, 0.70); // More distinct glowing pastel spotlight
+      const c2 = hslToRgb(h, s * 0.9, 0.76); // More distinct glowing pastel spotlight
+      const bg = hslToRgb(h, s * 0.4, 0.83); // 83% Lightness rich pastel base
       return { c1, c2, bg };
     }
 
@@ -248,17 +253,17 @@ export default function GradientCarousel({ photos }) {
         const [pr, pg, pb] = avgRGB(pIdx);
         let [h1, s1] = rgbToHsl(pr, pg, pb);
         s1 = Math.max(0.45, Math.min(1, s1 * 1.15));
-        const c1 = hslToRgb(h1, s1, 0.45);
-        const bg = hslToRgb(h1, s1 * 0.25, 0.07);
+        const c1 = hslToRgb(h1, s1 * 0.9, 0.70); // More distinct glowing pastel spotlight
+        const bg = hslToRgb(h1, Math.min(0.4, s1 * 0.65), 0.83); // 83% Lightness rich pastel base
 
         let c2;
         if (sIdx >= 0 && sW >= pW * 0.6) {
           const [sr, sg, sb] = avgRGB(sIdx);
           let [h2, s2] = rgbToHsl(sr, sg, sb);
           s2 = Math.max(0.45, Math.min(1, s2 * 1.05));
-          c2 = hslToRgb(h2, s2, 0.60);
+          c2 = hslToRgb(h2, s2 * 0.9, 0.76); // More distinct glowing pastel spotlight
         } else {
-          c2 = hslToRgb(h1, s1, 0.60);
+          c2 = hslToRgb(h1, s1 * 0.9, 0.76);
         }
 
         return { c1, c2, bg };
@@ -442,6 +447,7 @@ export default function GradientCarousel({ photos }) {
         if (i >= 5) {
           const img = it.el.querySelector("img");
           if (img && img.dataset.src) {
+            img.loading = "eager"; // Force immediate fetch in the background
             // Register listener BEFORE setting src to prevent missing cached loads
             img.addEventListener("load", () => {
               gradPalette[i] = extractColors(img, i);
@@ -456,25 +462,16 @@ export default function GradientCarousel({ photos }) {
       if (!bgCtx || idx < 0 || idx >= items.length || idx === activeIndex) return;
 
       activeIndex = idx;
-      const pal = gradPalette[idx] || { c1: [240, 240, 240], c2: [235, 235, 235], bg: [11, 12, 14] };
-      const to = {
-        r1: pal.c1[0],
-        g1: pal.c1[1],
-        b1: pal.c1[2],
-        r2: pal.c2[0],
-        g2: pal.c2[1],
-        b2: pal.c2[2],
-        bgr: pal.bg[0],
-        bgg: pal.bg[1],
-        bgb: pal.bg[2],
-      };
-
-      if (window.gsap) {
-        bgFastUntil = performance.now() + 800;
-        window.gsap.to(gradCurrent, { ...to, duration: 0.45, ease: "power2.out" });
-      } else {
-        Object.assign(gradCurrent, to);
-      }
+      const pal = gradPalette[idx] || { c1: [245, 240, 235], c2: [240, 235, 230], bg: [248, 245, 242] };
+      gradTarget.r1 = pal.c1[0];
+      gradTarget.g1 = pal.c1[1];
+      gradTarget.b1 = pal.c1[2];
+      gradTarget.r2 = pal.c2[0];
+      gradTarget.g2 = pal.c2[1];
+      gradTarget.b2 = pal.c2[2];
+      gradTarget.bgr = pal.bg[0];
+      gradTarget.bgg = pal.bg[1];
+      gradTarget.bgb = pal.bg[2];
     }
 
     // ========== BACKGROUND ==========
@@ -505,8 +502,22 @@ export default function GradientCarousel({ photos }) {
         return;
       }
 
+      const dt = Math.min(0.1, (now - lastBgDraw) / 1000);
       lastBgDraw = now;
       resizeBG();
+
+      // Smoothly interpolate current colors toward target colors (independent of GSAP)
+      const lerpSpeed = 4.5; // Easing speed
+      const lerpFactor = 1 - Math.exp(-lerpSpeed * dt);
+      gradCurrent.r1 += (gradTarget.r1 - gradCurrent.r1) * lerpFactor;
+      gradCurrent.g1 += (gradTarget.g1 - gradCurrent.g1) * lerpFactor;
+      gradCurrent.b1 += (gradTarget.b1 - gradCurrent.b1) * lerpFactor;
+      gradCurrent.r2 += (gradTarget.r2 - gradCurrent.r2) * lerpFactor;
+      gradCurrent.g2 += (gradTarget.g2 - gradCurrent.g2) * lerpFactor;
+      gradCurrent.b2 += (gradTarget.b2 - gradCurrent.b2) * lerpFactor;
+      gradCurrent.bgr += (gradTarget.bgr - gradCurrent.bgr) * lerpFactor;
+      gradCurrent.bgg += (gradTarget.bgg - gradCurrent.bgg) * lerpFactor;
+      gradCurrent.bgb += (gradTarget.bgb - gradCurrent.bgb) * lerpFactor;
 
       const w = bgCanvas.clientWidth || stage.clientWidth;
       const h = bgCanvas.clientHeight || stage.clientHeight;

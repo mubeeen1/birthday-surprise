@@ -22,7 +22,7 @@
   z-index: 100;
   display: grid;
   place-items: center;
-  background: #242A1D;
+  background: #FBEAD6;
   transition: opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.2s linear;
 }
  
