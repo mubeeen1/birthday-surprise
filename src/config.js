@@ -36,50 +36,42 @@ const config = {
     {
       name: "My Eternity 🕊️",
       text: "If I could give you one gift, it would be the ability to see yourself through my eyes—only then would you understand how incredibly perfect you are. Happy birthday to my entire world.",
-      logoUrl:
-        "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
+      logoUrl: "🕊️",
     },
     {
       name: "My Princess 👑",
       text: "On your special day, I want you to know you're the most beautiful chapter in my book of life. Meeting you was fate, but loving you is my life's greatest purpose. Happy birthday, my queen.",
-      logoUrl:
-        "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
+      logoUrl: "👑",
     },
     {
       name: "SUNSHINE ☀️",
       text: "You are the poetry my soul never knew it could write, and the light that guided me out of my darkest days. Thank you for simply existing and choosing to love me. Happy birthday, my love.",
-      logoUrl:
-        "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
+      logoUrl: "☀️",
     },
     {
       name: "MOONLIGHT 🌙",
       text: "With every sunrise and sunset, I find myself falling deeper in love with you. In a world full of temporary things, you are my absolute forever. Happy birthday to the holder of my heart.",
-      logoUrl:
-        "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
+      logoUrl: "🌙",
     },
     {
       name: "My Soulmate ♾️",
       text: "In your eyes, I found my safe haven and my forever home. You've healed the parts of me I never told you were broken. I love you endlessly, in this lifetime and every single one that follows.",
-      logoUrl:
-        "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
+      logoUrl: "♾️",
     },
     {
       name: "My Whole Heart ❤️",
       text: "May this year return to you all the warmth, kindness, and boundless joy you've given me, multiplied a thousand times. You deserve the universe, and I promise to spend my life trying to give it to you.",
-      logoUrl:
-        "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
+      logoUrl: "❤️",
     },
     {
       name: "My Sweetheart 🧸",
       text: "You are in every thought, every heartbeat, and every prayer of mine. Knowing you, loving you, and being loved by you is the greatest miracle that has ever happened to me. Happy birthday, baby.",
-      logoUrl:
-        "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
+      logoUrl: "🧸",
     },
     {
       name: "Lovebug 🐞",
       text: "Even on the quietest days, your love makes my heart beat with overwhelming gratitude. You are my dream come true, my best friend, and my most cherished blessing. I love you more than words could ever tell.",
-      logoUrl:
-        "https://pbs.twimg.com/profile_images/1950218390741618688/72447Y7e_400x400.jpg",
+      logoUrl: "🐞",
     },
   ],
 
