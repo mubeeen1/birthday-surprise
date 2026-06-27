@@ -35,7 +35,7 @@ const config = {
   wishes: [
     {
       name: "My Eternity 🕊️",
-      text: "If I could give you one gift, it would be the ability to see yourself through my eyes—only then would you understand how incredibly perfect you are. Happy birthday to my entire world.",
+      text: "If I could give you one gift, it would be the ability to see yourself through my eyes, only then would you understand how incredibly perfect you are. Happy birthday to my entire world.",
       logoUrl: "Infinity",
     },
     {

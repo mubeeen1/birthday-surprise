@@ -89,6 +89,7 @@ export default function HeroSection({ onOpenLetter }) {
             <motion.img
               src={config.heroPhoto}
               alt="Us"
+              style={{ objectPosition: "center 20%" }}
               className="relative w-full aspect-square object-cover rounded-full border-4 border-gold/45 shadow-cinematic ring-2 ring-cream/30"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
