@@ -325,6 +325,28 @@ export default function App() {
 
             {/* Content wrapped in relative z-10 to stack on top of the background and hearts */}
             <div className="relative z-10 w-full">
+              {/* Luxury Navigation Header */}
+              <header className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full pointer-events-auto">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  className="font-poster font-medium text-gradient-gold text-sm sm:text-base tracking-[0.25em] uppercase select-none flex items-center"
+                >
+                  For Alishba 🤍
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  className="flex items-center gap-4 text-deeprose/80 font-display font-light text-sm tracking-[0.15em] uppercase select-none"
+                >
+                  <span>03 . 07 . 2026</span>
+                  <span className="text-gold/60">✦</span>
+                  <span className="animate-pulse">Forever yours ♾️</span>
+                </motion.div>
+              </header>
+
               <ConfettiCelebration />
               <HeroSection onOpenLetter={() => setLetterOpen(true)} />
               <GradientCarousel photos={config.galleryPhotos} />

@@ -33,59 +33,66 @@ export default function HeroSection({ onOpenLetter }) {
       <div className="absolute top-0 left-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-champagne/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
-      <div className="relative z-10 max-w-3xl mx-auto text-center">
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
         {/* Ornament top */}
-        <motion.div variants={itemVariants} className="mb-6">
-          <div className="text-gold/80 font-display text-4xl font-light tracking-widest">
-            ✦
+        <motion.div variants={itemVariants} className="mb-8">
+          <div className="text-gold/80 font-display text-3xl font-light tracking-widest">
+            ✦ ✦ ✦
           </div>
         </motion.div>
 
-        {/* Main title */}
+        {/* Main title - Luxury Editorial Styling */}
         <motion.h1
           variants={itemVariants}
-          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-light text-deeprose mb-4 leading-tight"
+          className="mb-6 leading-tight flex flex-col items-center select-none"
         >
-          Happy
-          <br />
-          <span className="text-gradient-gold">Birthday</span>
+          <span className="font-display font-light italic text-2xl sm:text-3xl md:text-4xl text-deeprose/90 tracking-wide mb-1 pr-4">
+            Celebrating the Birthday of&nbsp;
+          </span>
+          <span className="font-poster font-light text-6xl sm:text-8xl md:text-9xl lg:text-[7.5rem] tracking-[0.18em] text-gradient-gold uppercase leading-none mt-4">
+            Alishba
+          </span>
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
-          className="text-lg sm:text-xl md:text-2xl font-cursive text-gold mb-8"
+          className="text-2xl sm:text-3xl md:text-4xl font-display font-light italic text-gold mb-10 tracking-wider select-none"
         >
           My Dearest Love
         </motion.p>
 
         {/* Separator */}
-        <motion.div variants={itemVariants} className="w-32 separator-elegant mx-auto mb-10" />
+        <motion.div variants={itemVariants} className="w-40 separator-elegant mx-auto mb-10" />
 
-        {/* Subtitle */}
+        {/* Subtitle / Poetic Quote */}
         <motion.p
           variants={itemVariants}
-          className="text-sm sm:text-base md:text-lg font-body text-mauve font-light leading-relaxed mb-12 max-w-2xl mx-auto"
+          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          className="text-xl sm:text-2xl md:text-3xl text-deeprose/90 font-light italic leading-relaxed mb-12 max-w-3xl mx-auto select-none"
         >
-          Every moment with you is a masterpiece. Today, we celebrate you—the love of my life, the reason my heart beats, and my greatest blessing.
+          "In a world where everything is temporary, your love is my absolute forever. You are my safe haven, the owner of my heart, and my greatest blessing."
         </motion.p>
 
-        {/* Image */}
-        <motion.div variants={itemVariants} className="my-10">
-          <div className="relative inline-block max-w-[210px] mx-auto">
-            {/* Decorative frame */}
+        {/* Image - Luxury Floating Ring Card */}
+        <motion.div variants={itemVariants} className="my-12">
+          <div className="relative inline-block max-w-[240px] mx-auto group">
+            {/* Soft ambient glowing background */}
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute -inset-6 md:-inset-10 bg-gradient-to-br from-gold/20 via-transparent to-champagne/20 rounded-full blur-xl"
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-8 bg-gradient-to-br from-gold/30 via-transparent to-deeprose/30 rounded-full blur-2xl opacity-80 group-hover:opacity-100 transition-opacity"
             />
+            {/* Elegant double gold rings */}
+            <div className="absolute -inset-4 border border-gold/35 rounded-full scale-100 group-hover:scale-105 transition-transform duration-700 pointer-events-none" />
+            <div className="absolute -inset-2 border border-deeprose/20 rounded-full scale-100 group-hover:scale-95 transition-transform duration-700 pointer-events-none" />
 
             <motion.img
               src={config.heroPhoto}
               alt="Us"
-              className="relative w-full aspect-square object-cover rounded-full border-5 border-gold/40 shadow-cinematic ring-3 ring-cream/50"
-              whileHover={{ scale: 1.04 }}
+              className="relative w-full aspect-square object-cover rounded-full border-4 border-gold/45 shadow-cinematic ring-2 ring-cream/30"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
             />
           </div>
         </motion.div>
