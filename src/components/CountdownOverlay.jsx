@@ -282,7 +282,7 @@ export default function CountdownOverlay({ date, onComplete }) {
             <br />
             <span className="text-gradient-gold">Extraordinary</span>
           </h2>
-          <p className="text-sm sm:text-lg md:text-2xl font-cursive text-gold mt-3">
+          <p className="text-sm sm:text-lg md:text-2xl font-dislay text-gold mt-3">
             is Awaiting
           </p>
         </motion.div>
